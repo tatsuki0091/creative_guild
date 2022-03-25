@@ -29,8 +29,6 @@ type PhotographerInfo = {
 
 const App = () => {
     const getPhotoGrapherAlbums = async () => {
-        // const { data } = await axios.get<PhotographerInfo>("api/photographer");
-        // setPhotographerInfo(data);
         // Use axios to fetch the data from API.
         await axios
             .get<PhotographerInfo>("api/photographer")
@@ -57,23 +55,34 @@ const App = () => {
             <main className="max-w-6xl mx-auto mt-12 antialiased">
                 <div className="container px-4 bg-gray-200 mx-auto">
                     <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-wrap flex-col-reverse text-center lg:text-left">
-                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/6 ml-16 lg:mt-10 lg:mb-10">
-                            <img
-                                src={photographerInfo?.profile_picture}
-                                alt="Profile"
-                                className="rounded-full"
-                                width={220}
-                                height={270}
-                                placeholder="blur"
-                            />
+                        <div className="w-full lg:w-1/6 lg:ml-16 lg:mt-10 lg:mb-10">
+                            {photographerInfo?.profile_picture ? (
+                                <img
+                                    src={photographerInfo?.profile_picture}
+                                    alt="Profile"
+                                    className="rounded-full sm:mx-auto md:mx-auto"
+                                    width={220}
+                                    height={270}
+                                    placeholder="blur"
+                                />
+                            ) : (
+                                <img
+                                    src={"img/noimage.jpg"}
+                                    alt="Profile"
+                                    className="rounded-full sm:mx-auto md:mx-auto"
+                                    width={220}
+                                    height={270}
+                                    placeholder="blur"
+                                />
+                            )}
                         </div>
-                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/2 lg:mt-10 lg:mb-10">
+                        <div className="w-full lg:w-1/2 lg:mt-10 lg:mb-10">
                             <h2 className="name">{photographerInfo?.name}</h2>
                             <div className="w-full text-lg">
                                 <p className="mb-4">{photographerInfo?.bio}</p>
                             </div>
                         </div>
-                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/6 mr-10 lg:mt-20 lg:mb-10">
+                        <div className="w-full  lg:w-1/6 mr-10 lg:mt-20 lg:mb-10">
                             <p className="w-full">Phone</p>
                             <p className="w-full contact-info">
                                 {photographerInfo?.phone_number}
